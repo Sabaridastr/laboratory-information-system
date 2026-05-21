@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab Reports</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e9f7ef;
+            border-left: 5px solid green;
+        }
+
+        .no-data {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📊 Lab Reports</h1>
+
+    {% for t in tests %}
+        <div class="card">
+            <h3>{{ t.patient.name }}</h3>
+            <p><strong>Test:</strong> {{ t.test_name }}</p>
+
+            <div class="result">
+                <strong>Result:</strong><br>
+                {{ t.result }}
+            </div>
+        </div>
+    {% empty %}
+        <p class="no-data">No completed reports available</p>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

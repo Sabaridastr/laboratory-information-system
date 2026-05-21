@@ -1,0 +1,8 @@
+<h1>Contact Page</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter name"><br><br>
+    <textarea name="message" placeholder="Enter message"></textarea><br><br>
+    <button type="submit">Submit</button>
+</form>

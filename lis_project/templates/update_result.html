@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Test Result</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🧪 Update Result</h1>
+
+    <div class="card">
+
+        <!-- ✅ TEST INFO -->
+        <div class="info-box">
+            <strong>Patient:</strong> {{ test.patient.name }} <br>
+            <strong>Test:</strong> {{ test.test_name }}
+        </div>
+
+        <!-- ✅ FORM -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Enter Result:</label>
+            <textarea name="result" rows="4" placeholder="Enter test result..." required>{{ test.result }}</textarea>
+
+            <button type="submit">Save Result</button>
+        </form>
+
+        <!-- ✅ BACK BUTTON -->
+        <a href="{% url 'tests' %}" class="back-btn">← Back to Tests</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="navbar">
+    <h2>Patients Management</h2>
+</div>
+
+<!-- 🔍 SEARCH BAR -->
+<div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+
+    <form method="GET">
+        <input type="text" name="q" value="{{ query }}" placeholder="Search patient..."
+               style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;">
+        
+        <button style="padding:10px 15px; background:#2c3e50; color:white; border:none; border-radius:6px;">
+            Search
+        </button>
+    </form>
+
+</div>
+
+<!-- ➕ ADD PATIENT -->
+<div style="background:white;padding:20px;border-radius:10px;margin-bottom:20px;">
+    <h3>Add Patient</h3>
+
+    <form method="POST" style="display:flex; gap:10px; flex-wrap:wrap;">
+        {% csrf_token %}
+        
+        <input type="text" name="name" placeholder="Name" required style="padding:10px; flex:1;">
+        <input type="number" name="age" placeholder="Age" required style="padding:10px; width:100px;">
+        <input type="text" name="disease" placeholder="Disease" required style="padding:10px; flex:1;">
+        
+        <button type="submit"
+            style="background:#27ae60;color:white;padding:10px 20px;border:none;border-radius:6px;">
+            + Add
+        </button>
+    </form>
+</div>
+
+<!-- 📋 PATIENT TABLE -->
+<div style="background:white;padding:20px;border-radius:10px;">
+    <h3>Patient Records</h3>
+
+    <table width="100%" style="border-collapse: collapse;">
+        <tr style="background:#2c3e50;color:white;">
+            <th style="padding:12px;">Name</th>
+            <th>Age</th>
+            <th>Disease</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for patient in patients %}
+        <tr style="text-align:center; border-bottom:1px solid #eee;">
+            <td style="padding:12px;">{{ patient.name }}</td>
+            <td>{{ patient.age }}</td>
+            <td>{{ patient.disease }}</td>
+            <td>
+                <!-- ✅ FIXED URLS -->
+                <a href="/patients/edit/{{ patient.id }}/"
+                   style="color:#2980b9; font-weight:bold;">Edit</a>
+                |
+                <a href="/patients/delete/{{ patient.id }}/"
+                   style="color:#e74c3c; font-weight:bold;"
+                   onclick="return confirm('Delete this patient?');">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="padding:20px;">No patients found</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}
